@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<style>
+		*, *::after, *::before{
+			margin: 0;
+			padding: 0;
+
+			/*font-family: 'Roboto Condensed', sans-serif;*/
+		}
+		body{
+			background-image: url("./bg.jpg");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		main{
+			width: 100vw;
+			height: 100lvh;
+
+			display: grid;
+
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-areas: "texto titulo contador";
+
+			color: white;
+		}
+
+		.titulo {
+			grid-area: titulo;
+			font-size: 40px;
+		  	text-align: center;
+		}
+
+		.texto {
+			grid-area: texto;
+			/*border: 2px solid red;*/
+			padding: 40px;
+			font-size: 40px;
+		}
+
+		.contador {
+			grid-area: contador;
+		  	text-align: center;
+
+			display: grid;
+			justify-items: center;
+			align-items: center;
+
+			font-size: 60px;
+		}
+
+		.autor {
+			padding: 20px 0;
+		}
+
+		@media(max-width: 1400px){
+			main{
+				width: 100vw;
+				height: 100vh;
+
+				display: grid;
+
+				grid-template-columns: 1fr;
+				grid-template-rows: 1fr 3fr 3fr;
+				grid-template-areas: "titulo" "texto" "contador";
+
+				color: white;
+				justify-items: center;
+			}
+
+			.texto {
+				font-size: 1.5em;
+/*				border: 1px solid red;*/
+				padding: 20px 20px 15px 20px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<div class="texto">
+			<p class="mensagem">Fiz isso aqui com o intuito de eternizar tudo o que sinto por você. Da mesma forma que eu sempre te amei e vou continuar te amando, este site vai ficar aqui para sempre, marcando cada minuto, cada momento que estamos juntos. Obrigado por sempre estar comigo, me apoiando e me motivando. Te amo.</p>
+
+			<p class="autor">Com muito amor,<br>
+			Ernan</p>
+		</div>
+		<div class="titulo">
+			<h1>Nosso Momento</h1>
+			
+		</div>
+		<div class="contador">
+			<p>00:00:00</p>
+		</div>
+	</main>
+	<script>
+	function atualizarContador() {
+	  const dataAlvo = new Date('2024-06-12T00:00:00'); // ISO format (ano-mês-dia)
+	  const agora = new Date();
+	  let diffMs = agora - dataAlvo;
+
+	  if (diffMs < 0) diffMs = 0; // evita mostrar tempo negativo
+
+	  const horas = String(Math.floor(diffMs / (1000 * 60 * 60))).padStart(2, '0');
+	  const minutos = String(Math.floor((diffMs / (1000 * 60)) % 60)).padStart(2, '0');
+	  const segundos = String(Math.floor((diffMs / 1000) % 60)).padStart(2, '0');
+
+	  document.querySelector('.contador p').textContent = `${horas}:${minutos}:${segundos}`;
+	}
+
+	atualizarContador();
+	setInterval(atualizarContador, 1000);
+	</script>
+</body>
+</html>
